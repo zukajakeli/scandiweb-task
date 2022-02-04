@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import PLP from "./pages/products-listing-page/PLP";
+
+class App extends React.Component {
+  render() {
+    console.log(this.state);
+    return (
+      <>
+        <PLP />
+        <h1>Hello, {this.props.name}</h1>
+        {this?.state?.categories?.map((category, index) => (
+          <div key={index}>{category.id}</div>
+        ))}
+      </>
+    );
+  }
 }
 
 export default App;
