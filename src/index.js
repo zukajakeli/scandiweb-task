@@ -9,6 +9,9 @@ import {
   ApolloProvider,
   gql,
 } from "@apollo/client";
+import { ThemeProvider } from "styled-components";
+import GlobalStyles from "./styles/global-styles";
+import { theme } from "./styles/theme";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000",
@@ -18,7 +21,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")

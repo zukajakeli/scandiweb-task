@@ -18,10 +18,6 @@ export default class PLP extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <S.Bla />
-      </div>
-    );
+    return <div></div>;
   }
 }
