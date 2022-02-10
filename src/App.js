@@ -11,7 +11,6 @@ class App extends React.Component {
       <>
         <GlobalStyles />
         <Header />
-        appjs
         <PLP />
       </>
     );

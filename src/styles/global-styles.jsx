@@ -4,6 +4,7 @@ import { normalize } from "styled-normalize";
 import ralewayBold from "../fonts/Raleway-Bold.ttf";
 import RalewayMedium from "../fonts/Raleway-Medium.ttf";
 import ralewayLight from "../fonts/Raleway-Light.ttf";
+import ralewayRegular from "../fonts/Raleway-Regular.ttf";
 
 const GlobalStyles = createGlobalStyle`
     ${normalize}
@@ -23,8 +24,14 @@ const GlobalStyles = createGlobalStyle`
 
     @font-face {
         font-family: "raleway";
-        font-weight: 400;
+        font-weight: 300;
         src: url(${ralewayLight}) format('truetype');
+    }
+
+    @font-face {
+        font-family: "raleway";
+        font-weight: 400;
+        src: url(${ralewayRegular}) format('truetype');
     }
 
     a {
@@ -42,6 +49,11 @@ const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
         margin: 0;
         padding: 0;
+    }
+
+    body {
+        padding: 0px 101px;
+        font-family: raleway;
     }
 
 `;

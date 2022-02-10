@@ -1,30 +1,42 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.header`
-  padding: 0px 100px;
   height: 80px;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-sizing: border-box;
   font-family: raleway;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 16px;
 `;
 
 export const CategoryList = styled.ul`
   list-style: none;
   display: flex;
-  gap: 32px;
   font-family: raleway;
   font-weight: 500;
+  height: 100%;
 `;
 
-export const Categoty = styled.li``;
+export const Categoty = styled.li`
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: content-box;
+  padding: 0px 15px;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.green};
+    border-bottom: 2px solid ${({ theme }) => theme.colors.green};
+  }
+`;
 
 export const IconWrapper = styled.span`
   cursor: pointer;
+  margin-top: 15px;
 
   & > svg {
     fill: #1dcf64;
