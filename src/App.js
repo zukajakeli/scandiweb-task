@@ -1,4 +1,7 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import ContextProvider from "./context/ContextProvider";
 
 import GlobalStyles from "./styles/global-styles";
 import Header from "./components/header/Header";
@@ -8,11 +11,15 @@ class App extends React.Component {
   render() {
     console.log(this.state);
     return (
-      <>
-        <GlobalStyles />
-        <Header />
-        <PLP />
-      </>
+      <Router>
+        <ContextProvider>
+          <GlobalStyles />
+          <Header />
+          <Switch>
+            <Route path="/" component={PLP} />
+          </Switch>
+        </ContextProvider>
+      </Router>
     );
   }
 }

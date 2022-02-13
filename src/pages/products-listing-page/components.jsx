@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.section`
-  margin-top: 80px;
+  padding-top: 160px;
   padding-bottom: 190px;
 `;
 
@@ -9,6 +9,7 @@ export const Heading = styled.h2`
   font-family: raleway;
   font-weight: 400;
   font-size: 42px;
+  text-transform: capitalize;
 `;
 
 export const ProductsWrapper = styled.div`

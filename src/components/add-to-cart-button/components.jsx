@@ -12,6 +12,8 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 12px;
+  display: none;
+  user-select: none;
 `;
 
 export const CartImage = styled.img`
