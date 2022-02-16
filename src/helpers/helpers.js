@@ -14,3 +14,9 @@ export const getPriceBySelectedCurrency = (
     (quantity * pricesObject[selectedCurrencyObject?.label])?.toFixed(2)
   );
 };
+
+export const getCartProductsQuantity = (cartProducts) => {
+  return cartProducts.reduce((prev, current) => {
+    return prev + current.quantity;
+  }, 0);
+};

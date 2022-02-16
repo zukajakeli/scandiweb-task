@@ -14,10 +14,16 @@ export class ProductCard extends Component {
     const { setCartProducts } = this.context;
 
     return (
-      <S.Wrapper inStock={inStock}>
+      <S.Wrapper
+        inStock={inStock}
+        onClick={() => {
+          this.props.history.push(`/product/${id}`);
+        }}
+      >
         <S.Image src={gallery[0]} />
         <S.AddToCartWrapper
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             setCartProducts(this.props);
           }}
         >

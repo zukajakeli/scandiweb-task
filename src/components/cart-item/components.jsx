@@ -6,10 +6,13 @@ export const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 137px;
+
+  border-top: ${({ isForCartPage }) => isForCartPage && "2px solid #E5E5E5"};
+  padding-top: ${({ isForCartPage }) => isForCartPage && "20px"};
 `;
 
 export const Description = styled.div`
-  width: 50%;
+  width: ${({ isForCartPage }) => (isForCartPage ? "100%" : "50%")};
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -33,7 +36,8 @@ export const Attributes = styled.div``;
 export const PhotoAndCounter = styled.div`
   height: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: ${({ isForCartPage }) =>
+    isForCartPage ? "flex-end" : "space-between"};
   width: 50%;
 `;
 
@@ -43,6 +47,8 @@ export const ImageWrapper = styled.div`
   align-items: center;
   flex: 1;
   height: 100%;
+
+  max-width: ${({ isForCartPage }) => isForCartPage && "140px"};
 `;
 
 export const Image = styled.img`

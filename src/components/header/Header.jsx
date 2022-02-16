@@ -1,4 +1,5 @@
 import React, { Component, createRef } from "react";
+import { withRouter } from "react-router-dom";
 
 import CurrencySelector from "../currency-selector/CurrencySelector";
 import CurrencyContext from "../../context/CurrencyContext";
@@ -6,13 +7,15 @@ import CartContext from "../../context/CartContext";
 import MiniCart from "../mini-cart/MiniCart";
 import OutsideClickDetector from "../outside-click-detector/OutsideClickDetector";
 
+import { getCartProductsQuantity } from "../../helpers/helpers";
+
 import { getCategories } from "../../API/API";
 import { ReactComponent as BackIcon } from "../../assets/icons/back.svg";
 import cartIcon from "../../assets/icons/cart.svg";
 import arrowDown from "../../assets/icons/arrow-down.svg";
 import * as S from "./components";
 
-export default class Header extends Component {
+class Header extends Component {
   constructor(props) {
     super(props);
 
@@ -65,12 +68,14 @@ export default class Header extends Component {
 
   render() {
     const { selectedCurrency } = this.context;
+    const { history } = this.props;
 
     return (
       <CartContext.Consumer>
         {(cartContext) => {
-          console.log(cartContext);
-          const cartProductsQuantity = cartContext.cartProducts.length;
+          const cartProductsQuantity = getCartProductsQuantity(
+            cartContext.cartProducts
+          );
 
           return (
             <S.Wrapper>
@@ -85,7 +90,11 @@ export default class Header extends Component {
               </S.CategoryList>
 
               <S.IconWrapper>
-                <BackIcon />
+                <BackIcon
+                  onClick={() => {
+                    history.push("/");
+                  }}
+                />
               </S.IconWrapper>
 
               <S.CartAndCurrency>
@@ -110,6 +119,7 @@ export default class Header extends Component {
                 </S.CartAndCounter>
                 <MiniCart
                   isMiniCartOpen={this.state.isMiniCartOpen}
+                  cartProductsQuantity={cartProductsQuantity}
                   onClickOutside={this.closeMiniCart}
                 />
               </S.CartAndCurrency>
@@ -120,3 +130,5 @@ export default class Header extends Component {
     );
   }
 }
+
+export default withRouter(Header);

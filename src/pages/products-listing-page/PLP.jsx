@@ -52,6 +52,7 @@ export default class PLP extends Component {
                   selectedCurrency={selectedCurrency}
                   inStock={inStock}
                   rest={rest}
+                  history={this.props.history}
                 />
               );
             }

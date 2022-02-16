@@ -4,8 +4,12 @@ import * as S from "./components";
 
 export default class MiniCartButton extends Component {
   render() {
-    const { isGreen, children } = this.props;
+    const { isGreen, children, onClick } = this.props;
 
-    return <S.Wrapper isGreen={this.props.isGreen}>{children}</S.Wrapper>;
+    return (
+      <S.Wrapper onClick={onClick} isGreen={isGreen}>
+        {children}
+      </S.Wrapper>
+    );
   }
 }

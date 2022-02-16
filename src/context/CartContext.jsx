@@ -10,22 +10,24 @@ export class CartProvider extends Component {
   setCartProducts = (product) => {
     this.setState((prevState) => {
       const productObj = { ...product };
-      const sameProduct = prevState.cartProducts.find((product) => {
+      const prev = { ...prevState };
+      const sameProduct = prev.cartProducts.find((product) => {
+        return product.id === productObj.id;
+      });
+      const index = prev.cartProducts.findIndex((product) => {
         return product.id === productObj.id;
       });
 
-      if (sameProduct) {
-        productObj.quantity = sameProduct.quantity + 1;
-      } else {
-        productObj.quantity = 1;
+      productObj.quantity = sameProduct ? sameProduct.quantity + 1 : 1;
+
+      if (index >= 0) {
+        prev.cartProducts[index] = { ...productObj };
+        return {
+          cartProducts: [...prevState.cartProducts],
+        };
       }
       return {
-        cartProducts: [
-          ...prevState.cartProducts.filter((product) => {
-            return product.id !== productObj.id;
-          }),
-          productObj,
-        ],
+        cartProducts: [...prevState.cartProducts, productObj],
       };
     });
   };
@@ -33,21 +35,24 @@ export class CartProvider extends Component {
   removeCartProduct = (product) => {
     this.setState((prevState) => {
       const productObj = { ...product };
-      const prevQuantity = productObj.quantity;
+      const prev = { ...prevState };
+      const qtyBeforeRemoving = productObj.quantity;
+      const index = prev.cartProducts.findIndex((product) => {
+        return product.id === productObj.id;
+      });
 
-      if (prevQuantity > 1) {
+      if (qtyBeforeRemoving > 1) {
+        prev.cartProducts[index] = {
+          ...productObj,
+          quantity: qtyBeforeRemoving - 1,
+        };
         return {
-          cartProducts: [
-            ...prevState.cartProducts.filter((product) => {
-              return product.id !== productObj.id;
-            }),
-            { ...productObj, quantity: prevQuantity - 1 },
-          ],
+          cartProducts: [...prev.cartProducts],
         };
       } else {
         return {
           cartProducts: [
-            ...prevState.cartProducts.filter((product) => {
+            ...prev.cartProducts.filter((product) => {
               return product.id !== productObj.id;
             }),
           ],

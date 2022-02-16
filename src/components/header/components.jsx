@@ -22,22 +22,10 @@ export const CategoryList = styled.ul`
   font-family: raleway;
   font-weight: 500;
   height: 100%;
+  width: 150px;
 `;
 
-export const Category = styled.li`
-  /* cursor: pointer; */
-  /* height: 100%; */
-  /* display: flex; */
-  /* align-items: center; */
-  /* box-sizing: content-box; */
-  /* padding: 0px 15px; */
-  /* text-transform: uppercase; */
-
-  /* &:hover {
-    color: ${({ theme }) => theme.colors.green};
-    border-bottom: 2px solid ${({ theme }) => theme.colors.green};
-  } */
-`;
+export const Category = styled.li``;
 
 export const Navlink = styled(NavLink)`
   cursor: pointer;
@@ -76,6 +64,7 @@ export const CartAndCurrency = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  width: 150px;
 `;
 
 export const CartIcon = styled.img`

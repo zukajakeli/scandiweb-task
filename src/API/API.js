@@ -70,3 +70,42 @@ export const getCategories = fetch("http://localhost:4000", {
             `,
   }),
 });
+
+export const getSingleProduct = (productId) => {
+  return fetch("http://localhost:4000", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
+        query {
+           product(id : "${productId}") {
+            id
+            name
+            inStock
+            gallery
+            description
+            category
+            attributes {
+              id
+              name
+              type
+              items {
+                displayValue
+                value
+                id
+              }
+            }
+            prices{
+              currency {
+                label
+                symbol
+              }
+              amount
+            }
+            brand
+          }
+        }
+          `,
+    }),
+  });
+};

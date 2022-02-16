@@ -8,13 +8,13 @@ import Button from "../button/MiniCartButton";
 import OutsideClickDetector from "../outside-click-detector/OutsideClickDetector";
 
 import * as S from "./components";
+import { withRouter } from "react-router-dom";
 
-export default class MiniCart extends Component {
+class MiniCart extends Component {
   static contextType = CartContext;
 
   render() {
-    const { isMiniCartOpen } = this.props;
-    const { cartProducts } = this.context;
+    const { isMiniCartOpen, cartProductsQuantity } = this.props;
 
     return (
       <CurrencyContext.Consumer>
@@ -34,14 +34,14 @@ export default class MiniCart extends Component {
             );
           }, 0);
 
-          console.log("isMiniCartOpen", isMiniCartOpen);
-
           return (
             <S.Wrapper isMiniCartOpen={isMiniCartOpen}>
               <OutsideClickDetector onClickOutside={this.props.onClickOutside}>
                 <S.TitleWrapper>
                   <S.Heading>My Bag,</S.Heading>
-                  <S.ItemsQuantity>{cartProducts.length} items</S.ItemsQuantity>
+                  <S.ItemsQuantity>
+                    {cartProductsQuantity} items
+                  </S.ItemsQuantity>
                 </S.TitleWrapper>
 
                 <S.ItemsWrapper>
@@ -65,7 +65,13 @@ export default class MiniCart extends Component {
                 </S.TotalPrice>
 
                 <S.ButtonsWrapper>
-                  <Button children={"VIEW BAG"} />
+                  <Button
+                    children={"VIEW BAG"}
+                    onClick={() => {
+                      this.props.onClickOutside();
+                      this.props.history.push("/cart");
+                    }}
+                  />
                   <Button isGreen children={"CHECKOUT"} />
                 </S.ButtonsWrapper>
               </OutsideClickDetector>
@@ -76,3 +82,5 @@ export default class MiniCart extends Component {
     );
   }
 }
+
+export default withRouter(MiniCart);
