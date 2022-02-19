@@ -28,6 +28,7 @@ export const OutOfStockText = styled.p`
   font-weight: 500;
   color: #8d8f9a;
   white-space: nowrap;
+  user-select: none;
 `;
 
 export const Image = styled.img`
@@ -35,6 +36,7 @@ export const Image = styled.img`
   object-fit: contain;
   box-shadow: rgba(149, 157, 165, 0.06) 0px 8px 24px;
   user-select: none;
+  width: 100%;
 `;
 
 export const Title = styled.h3`
@@ -49,4 +51,11 @@ export const Price = styled.p`
   font-weight: 500;
 `;
 
-export const AddToCartWrapper = styled.div``;
+export const AddToCartWrapper = styled.div`
+  z-index: 9;
+`;
+
+export const SwiperWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;

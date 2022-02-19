@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import { getCurrencies } from "../../API/API";
 import CurrencyContext from "../../context/CurrencyContext";
-import OutsideClickDetector from "../outside-click-detector/OutsideClickDetector";
 import * as S from "./components";
 
 export default class CurrencySelector extends Component {
@@ -31,22 +30,20 @@ export default class CurrencySelector extends Component {
     console.log(selectedCurrency);
     return (
       <S.Wrapper isCurrencyDropdownOpen={isCurrencyDropdownOpen}>
-        <OutsideClickDetector onClickOutside={this.props.onClickOutside}>
-          {this.state.currencies.map(({ label, symbol }, index) => {
-            return (
-              <S.SingleCurrency
-                key={index + label}
-                onClick={() => {
-                  setSelectedCurrency({ label, symbol });
-                  this.props.handler();
-                }}
-              >
-                <S.Symbol>{symbol}</S.Symbol>
-                <div>{label}</div>{" "}
-              </S.SingleCurrency>
-            );
-          })}
-        </OutsideClickDetector>
+        {this.state.currencies.map(({ label, symbol }, index) => {
+          return (
+            <S.SingleCurrency
+              key={index + label}
+              onClick={() => {
+                setSelectedCurrency({ label, symbol });
+                this.props.handler();
+              }}
+            >
+              <S.Symbol>{symbol}</S.Symbol>
+              <div>{label}</div>{" "}
+            </S.SingleCurrency>
+          );
+        })}
       </S.Wrapper>
     );
   }

@@ -83,7 +83,7 @@ class Header extends Component {
                 {this.state.categories.map(({ name }, index) => {
                   return (
                     <S.Category key={name + index}>
-                      <S.Navlink to={`category=${name}`}>{name}</S.Navlink>
+                      <S.Navlink to={`/category=${name}`}>{name}</S.Navlink>
                     </S.Category>
                   );
                 })}
@@ -98,30 +98,34 @@ class Header extends Component {
               </S.IconWrapper>
 
               <S.CartAndCurrency>
-                <S.CurrencyAndArrow onClick={this.currencyDropdownToggler}>
-                  <S.CurrencyIcon>{selectedCurrency?.symbol}</S.CurrencyIcon>
-                  <S.ArrowIcon
-                    src={arrowDown}
+                <OutsideClickDetector
+                  onClickOutside={this.closeCurrencySelector}
+                >
+                  <S.CurrencyAndArrow onClick={this.currencyDropdownToggler}>
+                    <S.CurrencyIcon>{selectedCurrency?.symbol}</S.CurrencyIcon>
+                    <S.ArrowIcon
+                      src={arrowDown}
+                      isCurrencyDropdownOpen={this.state.isCurrencyDropdownOpen}
+                    />
+                  </S.CurrencyAndArrow>
+                  <CurrencySelector
+                    handler={this.handler}
                     isCurrencyDropdownOpen={this.state.isCurrencyDropdownOpen}
                   />
-                </S.CurrencyAndArrow>
-                <CurrencySelector
-                  handler={this.handler}
-                  isCurrencyDropdownOpen={this.state.isCurrencyDropdownOpen}
-                  onClickOutside={this.closeCurrencySelector}
-                />
+                </OutsideClickDetector>
 
-                <S.CartAndCounter onClick={this.miniCartToggler}>
-                  <S.CartIcon src={cartIcon} />
-                  {!!cartProductsQuantity && (
-                    <S.CartCounter>{cartProductsQuantity}</S.CartCounter>
-                  )}
-                </S.CartAndCounter>
-                <MiniCart
-                  isMiniCartOpen={this.state.isMiniCartOpen}
-                  cartProductsQuantity={cartProductsQuantity}
-                  onClickOutside={this.closeMiniCart}
-                />
+                <OutsideClickDetector onClickOutside={this.closeMiniCart}>
+                  <S.CartAndCounter onClick={this.miniCartToggler}>
+                    <S.CartIcon src={cartIcon} />
+                    {!!cartProductsQuantity && (
+                      <S.CartCounter>{cartProductsQuantity}</S.CartCounter>
+                    )}
+                  </S.CartAndCounter>
+                  <MiniCart
+                    isMiniCartOpen={this.state.isMiniCartOpen}
+                    cartProductsQuantity={cartProductsQuantity}
+                  />
+                </OutsideClickDetector>
               </S.CartAndCurrency>
             </S.Wrapper>
           );

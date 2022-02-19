@@ -11,23 +11,30 @@ export class CartProvider extends Component {
     this.setState((prevState) => {
       const productObj = { ...product };
       const prev = { ...prevState };
-      const sameProduct = prev.cartProducts.find((product) => {
-        return product.id === productObj.id;
-      });
+
       const index = prev.cartProducts.findIndex((product) => {
         return product.id === productObj.id;
       });
 
-      productObj.quantity = sameProduct ? sameProduct.quantity + 1 : 1;
+      const sameProduct = prev.cartProducts[index];
 
       if (index >= 0) {
-        prev.cartProducts[index] = { ...productObj };
+        prev.cartProducts[index] = {
+          ...productObj,
+          quantity: sameProduct.quantity + 1,
+        };
         return {
-          cartProducts: [...prevState.cartProducts],
+          cartProducts: [...prev.cartProducts],
         };
       }
       return {
-        cartProducts: [...prevState.cartProducts, productObj],
+        cartProducts: [
+          ...prev.cartProducts,
+          {
+            ...productObj,
+            quantity: 1,
+          },
+        ],
       };
     });
   };

@@ -5,7 +5,6 @@ import CurrencyContext from "../../context/CurrencyContext";
 
 import CartItem from "../cart-item/CartItem";
 import Button from "../button/MiniCartButton";
-import OutsideClickDetector from "../outside-click-detector/OutsideClickDetector";
 
 import * as S from "./components";
 import { withRouter } from "react-router-dom";
@@ -36,45 +35,41 @@ class MiniCart extends Component {
 
           return (
             <S.Wrapper isMiniCartOpen={isMiniCartOpen}>
-              <OutsideClickDetector onClickOutside={this.props.onClickOutside}>
-                <S.TitleWrapper>
-                  <S.Heading>My Bag,</S.Heading>
-                  <S.ItemsQuantity>
-                    {cartProductsQuantity} items
-                  </S.ItemsQuantity>
-                </S.TitleWrapper>
+              <S.TitleWrapper>
+                <S.Heading>My Bag,</S.Heading>
+                <S.ItemsQuantity>{cartProductsQuantity} items</S.ItemsQuantity>
+              </S.TitleWrapper>
 
-                <S.ItemsWrapper>
-                  {cartProducts.map((product, index) => {
-                    return (
-                      <CartItem
-                        key={`cartItem${product.id}${index}`}
-                        product={product}
-                        selectedCurrency={selectedCurrency}
-                      />
-                    );
-                  })}
-                </S.ItemsWrapper>
+              <S.ItemsWrapper>
+                {cartProducts.map((product, index) => {
+                  return (
+                    <CartItem
+                      key={`cartItem${product.id}${index}`}
+                      product={product}
+                      selectedCurrency={selectedCurrency}
+                    />
+                  );
+                })}
+              </S.ItemsWrapper>
 
-                <S.TotalPrice>
-                  <S.TotalText>Total</S.TotalText>
-                  <S.PriceAmount>
-                    {currencyContext.selectedCurrency?.symbol}
-                    {totalPrice.toFixed(2)}
-                  </S.PriceAmount>
-                </S.TotalPrice>
+              <S.TotalPrice>
+                <S.TotalText>Total</S.TotalText>
+                <S.PriceAmount>
+                  {currencyContext.selectedCurrency?.symbol}
+                  {totalPrice.toFixed(2)}
+                </S.PriceAmount>
+              </S.TotalPrice>
 
-                <S.ButtonsWrapper>
-                  <Button
-                    children={"VIEW BAG"}
-                    onClick={() => {
-                      this.props.onClickOutside();
-                      this.props.history.push("/cart");
-                    }}
-                  />
-                  <Button isGreen children={"CHECKOUT"} />
-                </S.ButtonsWrapper>
-              </OutsideClickDetector>
+              <S.ButtonsWrapper>
+                <Button
+                  children={"VIEW BAG"}
+                  onClick={() => {
+                    this.props.onClickOutside();
+                    this.props.history.push("/cart");
+                  }}
+                />
+                <Button isGreen children={"CHECKOUT"} />
+              </S.ButtonsWrapper>
             </S.Wrapper>
           );
         }}
