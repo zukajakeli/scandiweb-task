@@ -124,6 +124,7 @@ class Header extends Component {
                   <MiniCart
                     isMiniCartOpen={this.state.isMiniCartOpen}
                     cartProductsQuantity={cartProductsQuantity}
+                    onClickOutside={this.closeMiniCart}
                   />
                 </OutsideClickDetector>
               </S.CartAndCurrency>

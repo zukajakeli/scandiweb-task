@@ -71,6 +71,7 @@ export const CartIcon = styled.img`
   width: 18px;
   height: 18px;
   cursor: pointer;
+  user-select: none;
 `;
 
 export const CurrencyIcon = styled.div`
@@ -122,4 +123,5 @@ export const CartCounter = styled.span`
 export const CartAndCounter = styled.div`
   position: relative;
   cursor: pointer;
+  user-select: none;
 `;

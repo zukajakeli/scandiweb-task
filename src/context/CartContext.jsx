@@ -8,6 +8,7 @@ export class CartProvider extends Component {
   };
 
   setCartProducts = (product) => {
+    console.log("oriduct", product);
     this.setState((prevState) => {
       const productObj = { ...product };
       const prev = { ...prevState };
@@ -33,6 +34,9 @@ export class CartProvider extends Component {
           {
             ...productObj,
             quantity: 1,
+            // selectedAttributes: productObj.rest?.attributes?.map((item) => {
+            //   return { name: item.name, value: item.items[0].id };
+            // }),
           },
         ],
       };
@@ -68,16 +72,45 @@ export class CartProvider extends Component {
     });
   };
 
+  setAttributes = (productId, attributes) => {
+    const index = this.state.cartProducts?.findIndex(
+      (item) => item.id === productId
+    );
+    console.log("indexeee", this.state.cartProducts[index]);
+    if (index >= 0) {
+      this.state.cartProducts[index].selectedAttributes = attributes;
+    }
+  };
+
+  getSelectedAttributes = (productId) => {
+    const selectedAttr = this.state.cartProducts.filter(
+      (item) => item.id === productId
+    )[0].selectedAttributes;
+
+    return selectedAttr;
+  };
+
   render() {
     const { children } = this.props;
     const { cartProducts } = this.state;
-    const { setCartProducts, removeCartProduct } = this;
+    const {
+      setCartProducts,
+      removeCartProduct,
+      setAttributes,
+      getSelectedAttributes,
+    } = this;
 
     console.log("cartProducts", cartProducts);
 
     return (
       <CartContext.Provider
-        value={{ cartProducts, removeCartProduct, setCartProducts }}
+        value={{
+          cartProducts,
+          removeCartProduct,
+          setCartProducts,
+          setAttributes,
+          getSelectedAttributes,
+        }}
       >
         {children}
       </CartContext.Provider>

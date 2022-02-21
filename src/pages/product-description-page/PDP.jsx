@@ -8,6 +8,7 @@ import { getSingleProduct } from "../../API/API";
 import { getPriceBySelectedCurrency } from "../../helpers/helpers";
 
 import SingleAttribute from "../../components/single-attribute/SingleAttribute";
+import WarningMessage from "../../components/warning-message/WarningMessage";
 
 import * as S from "./components";
 
@@ -15,15 +16,16 @@ export default class PDP extends Component {
   constructor(props) {
     super(props);
 
+    this.closeWarningMessage = this.closeWarningMessage.bind(this);
     this.attributeHandler = this.attributeHandler.bind(this);
   }
-
   static contextType = CurrencyContext;
 
   state = {
     singleProduct: {},
     selectedImage: "",
     selectedAttributes: [],
+    isWarningMessageOpen: false,
   };
 
   componentDidMount() {
@@ -39,6 +41,7 @@ export default class PDP extends Component {
   }
 
   attributeHandler(newAttribute) {
+    console.log("newAttribute", newAttribute);
     this.setState({
       selectedAttributes: [
         ...this.state.selectedAttributes.filter((item) => {
@@ -47,6 +50,16 @@ export default class PDP extends Component {
         { ...newAttribute },
       ],
     });
+
+    console.log("total Attrs", this.state.selectedAttributes);
+  }
+
+  closeWarningMessage() {
+    this.setState({ isWarningMessageOpen: false });
+  }
+
+  openWarningMessage() {
+    this.setState({ isWarningMessageOpen: true });
   }
 
   render() {
@@ -59,6 +72,7 @@ export default class PDP extends Component {
         description,
         inStock,
         attributes,
+        id: productId,
       },
       selectedImage,
     } = this.state;
@@ -109,6 +123,7 @@ export default class PDP extends Component {
                         attribute={attribute}
                         selectedAttributes={this.state.selectedAttributes}
                         attributeHandler={this.attributeHandler}
+                        productId={productId}
                       />
                     );
                   })}
@@ -117,13 +132,15 @@ export default class PDP extends Component {
                 <S.AddToCartButton
                   disabled={!inStock}
                   onClick={() => {
-                    inStock &&
-                      setCartProducts({
-                        ...this.state.singleProduct,
-                        selectedAttributes: {
-                          ...this.state.selectedAttributes,
-                        },
-                      });
+                    attributes.length !== this.state.selectedAttributes.length
+                      ? this.openWarningMessage()
+                      : inStock &&
+                        setCartProducts({
+                          ...this.state.singleProduct,
+                          selectedAttributes: {
+                            ...this.state.selectedAttributes,
+                          },
+                        });
                   }}
                 >
                   ADD TO CART
@@ -132,6 +149,12 @@ export default class PDP extends Component {
                   <div dangerouslySetInnerHTML={{ __html: description }} />
                 </S.Description>
               </S.Details>
+
+              {this.state.isWarningMessageOpen && (
+                <WarningMessage
+                  closeWarningMessage={this.closeWarningMessage}
+                />
+              )}
             </S.Wrapper>
           );
         }}

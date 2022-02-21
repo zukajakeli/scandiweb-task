@@ -16,14 +16,15 @@ import "./styles.css";
 export default class CartItem extends Component {
   static contextType = CartContext;
 
-  state = {
-    selectedAttributes: [],
-  };
-
   render() {
     const { product, selectedCurrency, isForCartPage } = this.props;
-    const { gallery, name, prices, quantity, attributes } = product;
-    const { setCartProducts, removeCartProduct } = this.context;
+    const { gallery, name, prices, quantity, attributes, id } = product;
+    const { setCartProducts, removeCartProduct, getSelectedAttributes } =
+      this.context;
+
+    const selectedAttributes = getSelectedAttributes(id);
+
+    console.log("selectedAttrs", selectedAttributes);
 
     console.log("itemDetails", product);
     return (
@@ -35,12 +36,12 @@ export default class CartItem extends Component {
           </S.Price>
 
           <S.Attributes>
-            {attributes?.map((attribute) => {
+            {selectedAttributes?.map((attribute) => {
               return (
                 <SingleAttribute
-                  key={attribute.id}
+                  key={`cartItemAttr${attribute.id}`}
                   attribute={attribute}
-                  selectedAttributes={this.state.selectedAttributes}
+                  selectedAttributes={selectedAttributes}
                   attributeHandler={this.attributeHandler}
                 />
               );
@@ -74,9 +75,12 @@ export default class CartItem extends Component {
                   modules={[Navigation]}
                   navigation={true}
                 >
-                  {gallery?.map((imageUrl) => {
+                  {gallery?.map((imageUrl, index) => {
                     return (
-                      <SwiperSlide className="cart-page-swiper" key={imageUrl}>
+                      <SwiperSlide
+                        className="cart-page-swiper"
+                        key={imageUrl + index}
+                      >
                         <S.Image src={imageUrl} />
                       </SwiperSlide>
                     );

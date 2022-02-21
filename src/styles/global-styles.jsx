@@ -54,6 +54,7 @@ const GlobalStyles = createGlobalStyle`
     body {
         padding: 0px 101px;
         font-family: raleway;
+        overflow-x: hidden;
     }
 
 `;

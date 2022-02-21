@@ -1,13 +1,19 @@
 import React, { Component } from "react";
 
+import CartContext from "../../context/CartContext";
+
 import * as S from "./components";
 
 export default class SingleAttribute extends Component {
+  static contextType = CartContext;
+
   render() {
+    const { setAttributes, getSelectedAttributes } = this.context;
     const {
       attribute: { name, items, type },
       attributeHandler,
       selectedAttributes,
+      productId,
     } = this.props;
 
     const selectedAttributesObject = {};
@@ -15,6 +21,7 @@ export default class SingleAttribute extends Component {
       selectedAttributesObject[name] = value;
     });
 
+    // const selectedAttributes = getSelectedAttributes(productId);
     console.log("selectedAttributes", selectedAttributes);
 
     return (
