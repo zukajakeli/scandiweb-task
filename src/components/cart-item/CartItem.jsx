@@ -6,7 +6,7 @@ import CartContext from "../../context/CartContext";
 import { getPriceBySelectedCurrency } from "../../helpers/helpers";
 import { ReactComponent as MinusIcon } from "../../assets/icons/minus.svg";
 import { ReactComponent as TrashIcon } from "../../assets/icons/trash.svg";
-import SingleAttribute from "../single-attribute/SingleAttribute";
+import CartItemAttributes from "../cart-item-attributes/CartItemAttributes";
 
 import * as S from "./components";
 import "swiper/css";
@@ -24,9 +24,6 @@ export default class CartItem extends Component {
 
     const selectedAttributes = getSelectedAttributes(id);
 
-    console.log("selectedAttrs", selectedAttributes);
-
-    console.log("itemDetails", product);
     return (
       <S.Wrapper isForCartPage={isForCartPage}>
         <S.Description isForCartPage={isForCartPage}>
@@ -36,13 +33,14 @@ export default class CartItem extends Component {
           </S.Price>
 
           <S.Attributes>
-            {selectedAttributes?.map((attribute) => {
+            {attributes?.map((attribute) => {
               return (
-                <SingleAttribute
+                <CartItemAttributes
                   key={`cartItemAttr${attribute.id}`}
                   attribute={attribute}
                   selectedAttributes={selectedAttributes}
                   attributeHandler={this.attributeHandler}
+                  productId={id}
                 />
               );
             })}

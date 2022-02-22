@@ -20,3 +20,7 @@ export const getCartProductsQuantity = (cartProducts) => {
     return prev + current.quantity;
   }, 0);
 };
+
+export const saveProductsToCache = (cartProducts) => {
+  localStorage.setItem("cache", JSON.stringify(cartProducts));
+};

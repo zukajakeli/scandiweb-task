@@ -4,33 +4,39 @@ import CartContext from "../../context/CartContext";
 
 import * as S from "./components";
 
-export default class SingleAttribute extends Component {
+export default class CartItemAttributes extends Component {
   static contextType = CartContext;
 
   render() {
     const {
       attribute: { name, items, type },
       attributeHandler,
+      productId,
       selectedAttributes,
     } = this.props;
 
-    const selectedAttributesObject = {};
-    selectedAttributes.forEach(({ name, value }) => {
-      selectedAttributesObject[name] = value;
+    const { setAttributes } = this.context;
+
+    const serializedAttributesObj = {};
+    selectedAttributes?.forEach(({ name, value }) => {
+      {
+        serializedAttributesObj[name] = value;
+      }
     });
+
+    console.log("serializedAttributes", serializedAttributesObj);
 
     return (
       <S.Wrapper>
-        <S.Name>{name}:</S.Name>
         <S.ItemsWrapper>
           {items?.map(({ id, displayValue, value }) => {
             return (
               <S.Item
                 key={id}
                 onClick={() => {
-                  attributeHandler({ name: name, value: id });
+                  setAttributes(productId, { name: name, value: id });
                 }}
-                selected={selectedAttributesObject[name] === id}
+                selected={serializedAttributesObj[name] === id}
                 background={value}
                 type={type}
               >

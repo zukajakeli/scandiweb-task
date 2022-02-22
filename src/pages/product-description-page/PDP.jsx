@@ -137,9 +137,9 @@ export default class PDP extends Component {
                       : inStock &&
                         setCartProducts({
                           ...this.state.singleProduct,
-                          selectedAttributes: {
+                          selectedAttributes: [
                             ...this.state.selectedAttributes,
-                          },
+                          ],
                         });
                   }}
                 >

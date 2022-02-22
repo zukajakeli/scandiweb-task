@@ -15,7 +15,8 @@ export class ProductCard extends Component {
   static contextType = CartContext;
 
   render() {
-    const { gallery, name, id, selectedCurrency, inStock } = this.props;
+    const { gallery, name, id, selectedCurrency, inStock, prices, product } =
+      this.props;
     const { setCartProducts } = this.context;
 
     return (
@@ -40,7 +41,7 @@ export class ProductCard extends Component {
         <S.AddToCartWrapper
           onClick={(e) => {
             e.stopPropagation();
-            setCartProducts(this.props);
+            setCartProducts(product);
           }}
         >
           {inStock ? (
@@ -57,7 +58,7 @@ export class ProductCard extends Component {
         </S.AddToCartWrapper>
         <S.Title>{name}</S.Title>
         <S.Price>
-          {getPriceBySelectedCurrency(selectedCurrency, this.props.prices)}
+          {getPriceBySelectedCurrency(selectedCurrency, prices)}
         </S.Price>
       </S.Wrapper>
     );

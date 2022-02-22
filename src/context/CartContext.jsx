@@ -1,10 +1,17 @@
 import React, { Component, createContext } from "react";
+import { saveProductsToCache } from "../helpers/helpers";
 
 const CartContext = createContext();
 
 export class CartProvider extends Component {
   state = {
     cartProducts: [],
+  };
+
+  setCachedProducts = (products) => {
+    this.setState({
+      cartProducts: [...products],
+    });
   };
 
   setCartProducts = (product) => {
@@ -21,11 +28,25 @@ export class CartProvider extends Component {
 
       if (index >= 0) {
         prev.cartProducts[index] = {
+          ...sameProduct,
           ...productObj,
           quantity: sameProduct.quantity + 1,
         };
         return {
           cartProducts: [...prev.cartProducts],
+        };
+      } else if (!productObj.selectedAttributes) {
+        return {
+          cartProducts: [
+            ...prev.cartProducts,
+            {
+              ...productObj,
+              quantity: 1,
+              selectedAttributes: productObj.attributes?.map((item) => {
+                return { name: item.name, value: item.items[0].id };
+              }),
+            },
+          ],
         };
       }
       return {
@@ -34,13 +55,13 @@ export class CartProvider extends Component {
           {
             ...productObj,
             quantity: 1,
-            // selectedAttributes: productObj.rest?.attributes?.map((item) => {
-            //   return { name: item.name, value: item.items[0].id };
-            // }),
           },
         ],
       };
     });
+    setTimeout(() => {
+      saveProductsToCache(this.state.cartProducts);
+    }, 500);
   };
 
   removeCartProduct = (product) => {
@@ -70,16 +91,31 @@ export class CartProvider extends Component {
         };
       }
     });
+    setTimeout(() => {
+      saveProductsToCache(this.state.cartProducts);
+    }, 500);
   };
 
   setAttributes = (productId, attributes) => {
+    console.log("yeeee", { attributes });
     const index = this.state.cartProducts?.findIndex(
       (item) => item.id === productId
     );
+    const cartProducts = [...this.state.cartProducts];
     console.log("indexeee", this.state.cartProducts[index]);
     if (index >= 0) {
-      this.state.cartProducts[index].selectedAttributes = attributes;
+      cartProducts[index].selectedAttributes = [
+        ...cartProducts[index].selectedAttributes.filter(
+          (item) => item.name !== attributes.name
+        ),
+        attributes,
+      ];
+      console.log("cartProds", cartProducts);
+      this.setState({ cartProducts: cartProducts });
     }
+    setTimeout(() => {
+      saveProductsToCache(this.state.cartProducts);
+    }, 500);
   };
 
   getSelectedAttributes = (productId) => {
@@ -98,6 +134,7 @@ export class CartProvider extends Component {
       removeCartProduct,
       setAttributes,
       getSelectedAttributes,
+      setCachedProducts,
     } = this;
 
     console.log("cartProducts", cartProducts);
@@ -110,6 +147,7 @@ export class CartProvider extends Component {
           setCartProducts,
           setAttributes,
           getSelectedAttributes,
+          setCachedProducts,
         }}
       >
         {children}

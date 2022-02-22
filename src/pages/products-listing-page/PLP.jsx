@@ -40,23 +40,21 @@ export default class PLP extends Component {
       <S.Wrapper>
         <S.Heading>{categoryName}</S.Heading>
         <S.ProductsWrapper>
-          {this.state.productsList?.map(
-            ({ name, prices, gallery, inStock, id, ...rest }) => {
-              return (
-                <ProductCard
-                  key={id}
-                  id={id}
-                  name={name}
-                  prices={prices}
-                  gallery={gallery}
-                  selectedCurrency={selectedCurrency}
-                  inStock={inStock}
-                  rest={rest}
-                  history={this.props.history}
-                />
-              );
-            }
-          )}
+          {this.state.productsList?.map((product) => {
+            return (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                prices={product.prices}
+                gallery={product.gallery}
+                selectedCurrency={selectedCurrency}
+                inStock={product.inStock}
+                product={product}
+                history={this.props.history}
+              />
+            );
+          })}
         </S.ProductsWrapper>
       </S.Wrapper>
     );

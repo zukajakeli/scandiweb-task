@@ -10,8 +10,8 @@ import {
   gql,
 } from "@apollo/client";
 import { ThemeProvider } from "styled-components";
-import GlobalStyles from "./styles/global-styles";
 import { theme } from "./styles/theme";
+import ContextProvider from "./context/ContextProvider";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000",
@@ -22,7 +22,9 @@ ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
-        <App />
+        <ContextProvider>
+          <App />
+        </ContextProvider>
       </ThemeProvider>
     </ApolloProvider>
   </React.StrictMode>,
