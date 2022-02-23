@@ -19,4 +19,4 @@ classes, so this task gave me the opportunity :)
 
 ### Hope you enjoy my code :) Have a great day
 
-#Sincerely, Zuka Jakeli
+# Sincerely, Zuka Jakeli
