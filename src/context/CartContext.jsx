@@ -62,7 +62,7 @@ export class CartProvider extends Component {
     });
     setTimeout(() => {
       saveProductsToCache(this.state.cartProducts);
-    }, 500);
+    }, 0);
   };
 
   removeCartProduct = (product) => {
@@ -94,7 +94,7 @@ export class CartProvider extends Component {
     });
     setTimeout(() => {
       saveProductsToCache(this.state.cartProducts);
-    }, 500);
+    }, 0);
   };
 
   setAttributes = (productId, attributes) => {
@@ -113,7 +113,7 @@ export class CartProvider extends Component {
     }
     setTimeout(() => {
       saveProductsToCache(this.state.cartProducts);
-    }, 500);
+    }, 0);
   };
 
   getSelectedAttributes = (productId) => {
