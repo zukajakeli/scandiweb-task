@@ -18,3 +18,5 @@ classes, so this task gave me the opportunity :)
 4. Also attributes can be changed from cart and minicart.
 
 ### Hope you enjoy my code :) Have a great day
+
+#Sincerely, Zuka Jakeli
