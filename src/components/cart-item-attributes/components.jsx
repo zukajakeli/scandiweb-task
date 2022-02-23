@@ -24,7 +24,7 @@ export const Item = styled.div`
   justify-content: center;
   align-items: center;
   border: 1px solid ${({ theme }) => theme.colors.black};
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 500;
   user-select: none;
   color: ${({ theme }) => theme.colors.black};

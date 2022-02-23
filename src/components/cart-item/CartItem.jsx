@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 
@@ -16,6 +16,18 @@ import "./styles.css";
 export default class CartItem extends Component {
   static contextType = CartContext;
 
+  state = { descriptionHeight: 0 };
+
+  descriptionRef = createRef();
+
+  componentDidMount() {
+    this.setState({
+      descriptionHeight: this.descriptionRef.current.clientHeight,
+    });
+
+    console.log("asdasdasdas", this.descriptionRef.current.clientHeight);
+  }
+
   render() {
     const { product, selectedCurrency, isForCartPage } = this.props;
     const { gallery, name, prices, quantity, attributes, id } = product;
@@ -26,7 +38,7 @@ export default class CartItem extends Component {
 
     return (
       <S.Wrapper isForCartPage={isForCartPage}>
-        <S.Description isForCartPage={isForCartPage}>
+        <S.Description ref={this.descriptionRef} isForCartPage={isForCartPage}>
           <S.Title>{name}</S.Title>
           <S.Price>
             {getPriceBySelectedCurrency(selectedCurrency, prices, quantity)}
@@ -48,7 +60,7 @@ export default class CartItem extends Component {
         </S.Description>
 
         <S.PhotoAndCounter isForCartPage={isForCartPage}>
-          <S.Counter>
+          <S.Counter height={this.state.descriptionHeight}>
             <S.CounterButton
               onClick={() => {
                 setCartProducts(product);

@@ -15,6 +15,7 @@ export const Description = styled.div`
   width: ${({ isForCartPage }) => (isForCartPage ? "100%" : "50%")};
   height: 100%;
   display: flex;
+  min-height: 100px;
   flex-direction: column;
   justify-content: space-between;
 `;
@@ -24,20 +25,19 @@ export const Title = styled.p`
   font-weight: 300;
   max-height: 50px;
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 `;
 
 export const Price = styled.p`
   font-weight: 500;
   font-size: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 `;
 
 export const Attributes = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3px;
-  margin-bottom: 12px;
 `;
 
 export const PhotoAndCounter = styled.div`
@@ -63,6 +63,7 @@ export const Image = styled.img`
   max-width: 100%;
   height: 100%;
   object-fit: contain;
+  max-height: 185px;
 `;
 
 export const Counter = styled.div`
@@ -71,7 +72,7 @@ export const Counter = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 24px;
-  /* height: 30px; */
+  height: ${({ height }) => `${height}px`};
   margin-right: 10px;
 `;
 
