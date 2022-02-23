@@ -17,7 +17,6 @@ export default class CurrencySelector extends Component {
     getCurrencies
       .then((res) => res.json())
       .then((res) => {
-        console.log(res.data.currencies);
         this.setState({ currencies: res.data.currencies });
         setSelectedCurrency(res.data.currencies[0]);
       });
@@ -27,7 +26,6 @@ export default class CurrencySelector extends Component {
     const { isCurrencyDropdownOpen } = this.props;
     const { selectedCurrency, setSelectedCurrency } = this.context;
 
-    console.log(selectedCurrency);
     return (
       <S.Wrapper isCurrencyDropdownOpen={isCurrencyDropdownOpen}>
         {this.state.currencies.map(({ label, symbol }, index) => {

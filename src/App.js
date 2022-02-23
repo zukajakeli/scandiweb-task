@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 import CartContext from "./context/CartContext";
 
@@ -9,6 +14,7 @@ import PDP from "./pages/product-description-page/PDP";
 import CartPage from "./pages/cart-page/CartPage";
 
 import GlobalStyles from "./styles/global-styles";
+import { routeNames } from "./helpers/constants";
 
 class App extends React.Component {
   static contextType = CartContext;
@@ -24,9 +30,16 @@ class App extends React.Component {
         <GlobalStyles />
         <Header />
         <Switch>
-          <Route path="/cart" component={CartPage} />
-          <Route path="/product/:productId" component={PDP} />
-          <Route path="/" component={PLP} />
+          <Route
+            exact
+            path="/"
+            render={() => {
+              return <Redirect to={routeNames.CATEGORY_ALL} />;
+            }}
+          />
+          <Route path={routeNames.CART} component={CartPage} />
+          <Route path={routeNames.PRODUCT} component={PDP} />
+          <Route path={routeNames.CATEGORY} component={PLP} />
         </Switch>
       </Router>
     );

@@ -24,8 +24,6 @@ export default class CartItem extends Component {
     this.setState({
       descriptionHeight: this.descriptionRef.current.clientHeight,
     });
-
-    console.log("asdasdasdas", this.descriptionRef.current.clientHeight);
   }
 
   render() {

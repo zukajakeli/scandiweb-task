@@ -10,7 +10,6 @@ export default class OutsideClickDetector extends Component {
   handleClickOutside = (event) => {
     if (this.ref?.current && !this.ref?.current.contains(event.target)) {
       this.props.onClickOutside();
-      console.log("You clicked outside of me!");
     }
   };
 

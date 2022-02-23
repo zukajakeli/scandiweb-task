@@ -41,7 +41,6 @@ export default class PDP extends Component {
   }
 
   attributeHandler(newAttribute) {
-    console.log("newAttribute", newAttribute);
     this.setState({
       selectedAttributes: [
         ...this.state.selectedAttributes.filter((item) => {
@@ -50,8 +49,6 @@ export default class PDP extends Component {
         { ...newAttribute },
       ],
     });
-
-    console.log("total Attrs", this.state.selectedAttributes);
   }
 
   closeWarningMessage() {

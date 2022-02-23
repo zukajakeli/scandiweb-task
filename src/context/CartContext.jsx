@@ -9,13 +9,14 @@ export class CartProvider extends Component {
   };
 
   setCachedProducts = (products) => {
-    this.setState({
-      cartProducts: [...products],
-    });
+    if (products) {
+      this.setState({
+        cartProducts: [...products],
+      });
+    }
   };
 
   setCartProducts = (product) => {
-    console.log("oriduct", product);
     this.setState((prevState) => {
       const productObj = { ...product };
       const prev = { ...prevState };
@@ -97,12 +98,10 @@ export class CartProvider extends Component {
   };
 
   setAttributes = (productId, attributes) => {
-    console.log("yeeee", { attributes });
     const index = this.state.cartProducts?.findIndex(
       (item) => item.id === productId
     );
     const cartProducts = [...this.state.cartProducts];
-    console.log("indexeee", this.state.cartProducts[index]);
     if (index >= 0) {
       cartProducts[index].selectedAttributes = [
         ...cartProducts[index].selectedAttributes.filter(
@@ -110,7 +109,6 @@ export class CartProvider extends Component {
         ),
         attributes,
       ];
-      console.log("cartProds", cartProducts);
       this.setState({ cartProducts: cartProducts });
     }
     setTimeout(() => {
@@ -136,8 +134,6 @@ export class CartProvider extends Component {
       getSelectedAttributes,
       setCachedProducts,
     } = this;
-
-    console.log("cartProducts", cartProducts);
 
     return (
       <CartContext.Provider

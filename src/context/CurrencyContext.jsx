@@ -16,8 +16,6 @@ export class CurrencyProvider extends Component {
     const { selectedCurrency } = this.state;
     const { setSelectedCurrency } = this;
 
-    console.log("selectedCurrency", selectedCurrency);
-
     return (
       <CurrencyContext.Provider
         value={{ selectedCurrency, setSelectedCurrency }}

@@ -8,6 +8,7 @@ import MiniCart from "../mini-cart/MiniCart";
 import OutsideClickDetector from "../outside-click-detector/OutsideClickDetector";
 
 import { getCartProductsQuantity } from "../../helpers/helpers";
+import { routeNames } from "../../helpers/constants";
 
 import { getCategories } from "../../API/API";
 import { ReactComponent as BackIcon } from "../../assets/icons/back.svg";
@@ -83,7 +84,9 @@ class Header extends Component {
                 {this.state.categories.map(({ name }, index) => {
                   return (
                     <S.Category key={name + index}>
-                      <S.Navlink to={`/category=${name}`}>{name}</S.Navlink>
+                      <S.Navlink to={`${routeNames.CATEGORY_EXACT}${name}`}>
+                        {name}
+                      </S.Navlink>
                     </S.Category>
                   );
                 })}

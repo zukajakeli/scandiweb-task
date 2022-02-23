@@ -13,20 +13,23 @@ export default class PLP extends Component {
   };
 
   componentDidMount() {
-    getProductsByCategory("")
+    const { categoryName } = this.props.match.params;
+    getProductsByCategory(categoryName)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res.data.category.products);
         this.setState({ productsList: res.data.category.products });
       });
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.location.pathname !== this.props.location.pathname) {
-      getProductsByCategory(this.props.location.pathname.split("=")[1])
+    console.log("shemevida");
+    console.log("prevProps.location.pathname", prevProps.location);
+    console.log("this.props.location.pathname ", this.props.history);
+
+    if (prevProps.match.params !== this.props.match.params) {
+      getProductsByCategory(this.props.match.params.categoryName)
         .then((res) => res.json())
         .then((res) => {
-          console.log(res.data.category.products);
           this.setState({ productsList: res.data.category.products });
         });
     }

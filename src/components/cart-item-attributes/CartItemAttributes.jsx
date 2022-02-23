@@ -24,8 +24,6 @@ export default class CartItemAttributes extends Component {
       }
     });
 
-    console.log("serializedAttributes", serializedAttributesObj);
-
     return (
       <S.Wrapper>
         <S.ItemsWrapper>

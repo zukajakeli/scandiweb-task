@@ -20,8 +20,6 @@ class MiniCart extends Component {
         {(currencyContext) => {
           const { cartProducts } = this.context;
           const { selectedCurrency } = currencyContext;
-          console.log("cart", cartProducts);
-          console.log("currnecy", currencyContext);
 
           const totalPrice = cartProducts.reduce((prev, current) => {
             return (
