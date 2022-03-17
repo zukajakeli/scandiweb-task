@@ -32,7 +32,7 @@ export default class PLP extends Component {
   }
 
   render() {
-    const categoryName = this.props.location.pathname.split("=")[1];
+    const categoryName = this.props.match.params.categoryName;
     const { selectedCurrency } = this.context;
 
     return (

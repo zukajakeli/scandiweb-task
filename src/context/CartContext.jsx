@@ -22,7 +22,7 @@ export class CartProvider extends Component {
       const prev = { ...prevState };
 
       const index = prev.cartProducts.findIndex((product) => {
-        return product.id === productObj.id;
+        return product.attrId === JSON.stringify(productObj.selectedAttributes);
       });
 
       const sameProduct = prev.cartProducts[index];
@@ -36,26 +36,33 @@ export class CartProvider extends Component {
         return {
           cartProducts: [...prev.cartProducts],
         };
-      } else if (!productObj.selectedAttributes) {
+      } else if (
+        !productObj.attributes.length &&
+        prev.cartProducts.find((item) => item.attrId === productObj.id)
+      ) {
+        const index = prev.cartProducts.findIndex(
+          (item) => item.attrId === productObj.id
+        );
+        const prevCount = prev.cartProducts[index].quantity;
+        prev.cartProducts[index] = {
+          ...prev.cartProducts[index],
+          quantity: prevCount + 1,
+        };
+
         return {
-          cartProducts: [
-            ...prev.cartProducts,
-            {
-              ...productObj,
-              quantity: 1,
-              selectedAttributes: productObj.attributes?.map((item) => {
-                return { name: item.name, value: item.items[0].id };
-              }),
-            },
-          ],
+          cartProducts: [...prev.cartProducts],
         };
       }
+
       return {
         cartProducts: [
           ...prev.cartProducts,
           {
             ...productObj,
             quantity: 1,
+            attrId: !!productObj.attributes.length
+              ? JSON.stringify(productObj.selectedAttributes)
+              : productObj.id,
           },
         ],
       };
@@ -71,7 +78,7 @@ export class CartProvider extends Component {
       const prev = { ...prevState };
       const qtyBeforeRemoving = productObj.quantity;
       const index = prev.cartProducts.findIndex((product) => {
-        return product.id === productObj.id;
+        return product.attrId === productObj.attrId;
       });
 
       if (qtyBeforeRemoving > 1) {
@@ -86,7 +93,7 @@ export class CartProvider extends Component {
         return {
           cartProducts: [
             ...prev.cartProducts.filter((product) => {
-              return product.id !== productObj.id;
+              return product.attrId !== productObj.attrId;
             }),
           ],
         };
@@ -97,29 +104,10 @@ export class CartProvider extends Component {
     }, 0);
   };
 
-  setAttributes = (productId, attributes) => {
-    const index = this.state.cartProducts?.findIndex(
-      (item) => item.id === productId
-    );
-    const cartProducts = [...this.state.cartProducts];
-    if (index >= 0) {
-      cartProducts[index].selectedAttributes = [
-        ...cartProducts[index].selectedAttributes.filter(
-          (item) => item.name !== attributes.name
-        ),
-        attributes,
-      ];
-      this.setState({ cartProducts: cartProducts });
-    }
-    setTimeout(() => {
-      saveProductsToCache(this.state.cartProducts);
-    }, 0);
-  };
-
   getSelectedAttributes = (productId) => {
     const selectedAttr = this.state.cartProducts.filter(
-      (item) => item.id === productId
-    )[0].selectedAttributes;
+      (item) => item.attrId === productId
+    )[0]?.selectedAttributes;
 
     return selectedAttr;
   };
@@ -130,7 +118,6 @@ export class CartProvider extends Component {
     const {
       setCartProducts,
       removeCartProduct,
-      setAttributes,
       getSelectedAttributes,
       setCachedProducts,
     } = this;
@@ -141,7 +128,6 @@ export class CartProvider extends Component {
           cartProducts,
           removeCartProduct,
           setCartProducts,
-          setAttributes,
           getSelectedAttributes,
           setCachedProducts,
         }}

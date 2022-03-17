@@ -10,11 +10,8 @@ export default class CartItemAttributes extends Component {
   render() {
     const {
       attribute: { name, items, type },
-      productId,
       selectedAttributes,
     } = this.props;
-
-    const { setAttributes } = this.context;
 
     const serializedAttributesObj = {};
     selectedAttributes?.forEach(({ name, value }) => {
@@ -28,9 +25,6 @@ export default class CartItemAttributes extends Component {
             return (
               <S.Item
                 key={id}
-                onClick={() => {
-                  setAttributes(productId, { name: name, value: id });
-                }}
                 selected={serializedAttributesObj[name] === id}
                 background={value}
                 type={type}

@@ -28,7 +28,7 @@ export default class CartItem extends Component {
 
   render() {
     const { product, selectedCurrency, isForCartPage } = this.props;
-    const { gallery, name, prices, quantity, attributes, id } = product;
+    const { gallery, name, prices, quantity, attributes, attrId: id } = product;
     const { setCartProducts, removeCartProduct, getSelectedAttributes } =
       this.context;
 

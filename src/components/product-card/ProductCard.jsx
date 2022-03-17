@@ -19,13 +19,12 @@ export class ProductCard extends Component {
       this.props;
     const { setCartProducts } = this.context;
 
+    const openPDP = () => {
+      this.props.history.push(`/product/${id}`);
+    };
+
     return (
-      <S.Wrapper
-        inStock={inStock}
-        onClick={() => {
-          this.props.history.push(`/product/${id}`);
-        }}
-      >
+      <S.Wrapper inStock={inStock} onClick={openPDP}>
         <S.SwiperWrapper>
           <Swiper className="mySwiper" modules={[Pagination]} pagination={true}>
             {gallery?.map((imageUrl) => {
@@ -39,10 +38,14 @@ export class ProductCard extends Component {
         </S.SwiperWrapper>
 
         <S.AddToCartWrapper
-          onClick={(e) => {
-            e.stopPropagation();
-            setCartProducts(product);
-          }}
+          onClick={
+            !!product.attributes.length
+              ? openPDP
+              : (e) => {
+                  e.stopPropagation();
+                  setCartProducts(product);
+                }
+          }
         >
           {inStock ? (
             <AddToCartButton />
