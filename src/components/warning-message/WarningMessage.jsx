@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import * as S from "./components";
 
-export default class WarningMessage extends Component {
+export default class WarningMessage extends PureComponent {
   state = {
     isActive: false,
   };

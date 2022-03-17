@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import CartContext from "../../context/CartContext";
 import CurrencyContext from "../../context/CurrencyContext";
@@ -7,7 +7,7 @@ import CartItem from "../../components/cart-item/CartItem";
 import emptyCartIcon from "../../assets/icons/empty-cart.svg";
 import * as S from "./components";
 
-export default class CartPage extends Component {
+export default class CartPage extends PureComponent {
   static contextType = CartContext;
 
   render() {

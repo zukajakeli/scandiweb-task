@@ -1,6 +1,6 @@
-import React, { Component, createRef } from "react";
+import React, { PureComponent, createRef } from "react";
 
-export default class OutsideClickDetector extends Component {
+export default class OutsideClickDetector extends PureComponent {
   constructor(props) {
     super(props);
 

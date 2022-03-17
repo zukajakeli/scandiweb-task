@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import CartContext from "../../context/CartContext";
 
 import * as S from "./components";
 
-export default class SingleAttribute extends Component {
+export default class SingleAttribute extends PureComponent {
   static contextType = CartContext;
 
   render() {

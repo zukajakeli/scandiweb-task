@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import InnerImageZoom from "react-inner-image-zoom";
+import parseHtml from "html-react-parser";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
 
 import CurrencyContext from "../../context/CurrencyContext";
@@ -142,9 +143,11 @@ export default class PDP extends Component {
                 >
                   ADD TO CART
                 </S.AddToCartButton>
-                <S.Description>
-                  <div dangerouslySetInnerHTML={{ __html: description }} />
-                </S.Description>
+                {description && (
+                  <S.Description>
+                    <div>{parseHtml(description)} </div>
+                  </S.Description>
+                )}
               </S.Details>
 
               {this.state.isWarningMessageOpen && (

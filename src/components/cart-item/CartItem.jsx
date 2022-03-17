@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React, { PureComponent, createRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 
@@ -13,7 +13,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "./styles.css";
 
-export default class CartItem extends Component {
+export default class CartItem extends PureComponent {
   static contextType = CartContext;
 
   state = { descriptionHeight: 0 };

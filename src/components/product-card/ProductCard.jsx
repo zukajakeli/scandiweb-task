@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 
@@ -11,7 +11,7 @@ import "swiper/css";
 import "./swiper-custom.css";
 import "swiper/css/pagination";
 
-export class ProductCard extends Component {
+export class ProductCard extends PureComponent {
   static contextType = CartContext;
 
   render() {

@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import { getProductsByCategory } from "../../API/API";
 import CurrencyContext from "../../context/CurrencyContext";
 import ProductCard from "../../components/product-card/ProductCard";
 import * as S from "./components";
 
-export default class PLP extends Component {
+export default class PLP extends PureComponent {
   static contextType = CurrencyContext;
 
   state = {

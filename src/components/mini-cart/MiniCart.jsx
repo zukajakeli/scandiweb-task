@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import CartContext from "../../context/CartContext";
 import CurrencyContext from "../../context/CurrencyContext";
@@ -9,7 +9,7 @@ import Button from "../button/MiniCartButton";
 import * as S from "./components";
 import { withRouter } from "react-router-dom";
 
-class MiniCart extends Component {
+class MiniCart extends PureComponent {
   static contextType = CartContext;
 
   render() {

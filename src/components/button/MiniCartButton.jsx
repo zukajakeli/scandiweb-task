@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import * as S from "./components";
 
-export default class MiniCartButton extends Component {
+export default class MiniCartButton extends PureComponent {
   render() {
     const { isGreen, children, onClick } = this.props;
 
