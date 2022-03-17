@@ -24,7 +24,7 @@ export default class CurrencySelector extends Component {
 
   render() {
     const { isCurrencyDropdownOpen } = this.props;
-    const { selectedCurrency, setSelectedCurrency } = this.context;
+    const { setSelectedCurrency } = this.context;
 
     return (
       <S.Wrapper isCurrencyDropdownOpen={isCurrencyDropdownOpen}>

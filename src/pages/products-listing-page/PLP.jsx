@@ -22,10 +22,6 @@ export default class PLP extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log("shemevida");
-    console.log("prevProps.location.pathname", prevProps.location);
-    console.log("this.props.location.pathname ", this.props.history);
-
     if (prevProps.match.params !== this.props.match.params) {
       getProductsByCategory(this.props.match.params.categoryName)
         .then((res) => res.json())

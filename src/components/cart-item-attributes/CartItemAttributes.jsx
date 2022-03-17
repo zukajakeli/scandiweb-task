@@ -10,7 +10,6 @@ export default class CartItemAttributes extends Component {
   render() {
     const {
       attribute: { name, items, type },
-      attributeHandler,
       productId,
       selectedAttributes,
     } = this.props;
@@ -19,9 +18,7 @@ export default class CartItemAttributes extends Component {
 
     const serializedAttributesObj = {};
     selectedAttributes?.forEach(({ name, value }) => {
-      {
-        serializedAttributesObj[name] = value;
-      }
+      serializedAttributesObj[name] = value;
     });
 
     return (
